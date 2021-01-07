@@ -1,0 +1,23 @@
+const mysql = require("mysql");
+const inquirer = require("inquirer");
+const connection = mysql.createConnection({
+    host: "localhost",
+    port: 3306,
+    user: "root",
+    password: "Faizahkibria1!",
+    database: "employees"
+})
+
+connection.connect(function(err){
+    if(err) throw err;
+    console.log("connected as id " + connection.threadId);
+    getAllEmployees();
+})
+
+function getAllEmployees(){
+    connection.query("SELECT * FROM employee",
+    function(err, res){
+        if(err) throw err;
+        console.table(res);
+    })
+}
